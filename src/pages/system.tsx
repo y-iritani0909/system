@@ -13,7 +13,7 @@ export default function Home() {
         }}
       >
         <h1 style={{ color: "#311b92", fontSize: "2rem" }}>
-          Hello from system App
+          system page
         </h1>
       </div>
     </>

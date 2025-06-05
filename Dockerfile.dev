@@ -1,0 +1,15 @@
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Copy package files from system directory
+COPY system/package*.json ./
+
+RUN npm install
+
+# Copy the rest of the system application
+COPY system/ ./
+
+EXPOSE 3000
+
+CMD ["npm", "run", "dev"]
