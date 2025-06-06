@@ -4,18 +4,18 @@ FROM node:18-alpine AS base
 FROM base AS deps
 WORKDIR /app
 
-# Copy package files from system directory
-COPY system/package*.json ./
+# Copy package files
+COPY package*.json ./
 RUN npm ci --only=production
 
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
-COPY system/package*.json ./
+COPY package*.json ./
 RUN npm ci
 
-# Copy the rest of the system application
-COPY system/ ./
+# Copy the rest of the application
+COPY . .
 
 # Build the application
 RUN npm run build
