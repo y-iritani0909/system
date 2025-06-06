@@ -1,0 +1,36 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: microfrontend-ingress
+  annotations:
+    kubernetes.io/ingress.class: "gce"
+    # 将来的にSSL証明書も追加可能
+    # kubernetes.io/ingress.global-static-ip-name: "microfrontend-ip"
+spec:
+  rules:
+    # IPアドレス直接アクセス用（ホスト名指定なし）
+    - http:
+        paths:
+          # System アプリ
+          - path: /system
+            pathType: Prefix
+            backend:
+              service:
+                name: system-service
+                port:
+                  number: 80
+          # ルートパスもsystemアプリに転送
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: system-service
+                port:
+                  number: 80
+          - path: /csp
+            pathType: Prefix
+            backend:
+              service:
+                name: system-service  # 暫定
+                port:
+                  number: 80
