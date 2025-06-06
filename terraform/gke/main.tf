@@ -5,6 +5,9 @@ resource "google_container_cluster" "primary" {
   # GKE Autopilotモードを使用
   enable_autopilot = true
 
+  # 削除保護を無効にする
+  deletion_protection = false
+
   # ネットワーク設定
   network    = "form-vpc"
   subnetwork = "form-vpc"

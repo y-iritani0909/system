@@ -4,6 +4,8 @@ metadata:
   name: system-service
   labels:
     app: system
+  annotations:
+    cloud.google.com/backend-config: '{"default": "system-backend-config"}'
 spec:
   type: ClusterIP
   ports:
