@@ -1,0 +1,4 @@
+project_id   = "sandbox-milabo"
+region       = "asia-northeast1"
+zone         = "asia-northeast1"
+cluster_name = "system-cluster" 

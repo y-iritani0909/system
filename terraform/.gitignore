@@ -1,0 +1,42 @@
+# Terraform 機密ファイル・一時ファイル
+
+# State files - 状態ファイル（機密情報含む）
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+
+# Crash log files - クラッシュログ
+crash.log
+crash.*.log
+
+# 実際の設定値ファイル（機密情報含む）
+terraform.tfvars
+*.auto.tfvars
+
+# Override files - オーバーライドファイル
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# プロバイダープラグインディレクトリ
+.terraform/
+
+# CLI設定ファイル
+.terraformrc
+terraform.rc
+
+# Variable definitions file - 個人設定
+*.tfvars.local
+
+# プラン出力ファイル
+*.plan
+*.out
+
+# バックアップファイル
+*.backup
+*~
+
+# OS固有ファイル
+.DS_Store
+Thumbs.db 
