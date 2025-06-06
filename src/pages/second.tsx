@@ -3,7 +3,7 @@ export default function Home() {
     <>
       <div
         style={{
-          backgroundColor: "#ffebee",
+          backgroundColor: "#A5A5A5FF",
           minHeight: "100vh",
           display: "flex",
           justifyContent: "center",
@@ -12,9 +12,7 @@ export default function Home() {
           padding: 0,
         }}
       >
-        <h1 style={{ color: "#311b92", fontSize: "2rem" }}>
-          system page
-        </h1>
+        <h1 style={{ color: "#311b92", fontSize: "2rem" }}>second page</h1>
       </div>
     </>
   );
