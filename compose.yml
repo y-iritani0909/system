@@ -1,0 +1,88 @@
+# これを一個上のディレクトリに置くと使えます
+version: "3"
+
+networks:
+  gcas-form-lg:
+    driver: bridge
+
+services:
+  system:
+    networks:
+      - gcas-form-lg
+    container_name: system
+    build:
+      context: .
+      dockerfile: ./system/Dockerfile.dev
+    develop:
+      watch:
+        - action: sync
+          path: ./system/src
+          target: /app/src
+        - action: sync
+          path: ./system/public
+          target: /app/public
+        - action: rebuild
+          path: ./system/package.json
+    restart: always
+    ports:
+      - 3000:3000
+
+  aws:
+    networks:
+      - gcas-form-lg
+    container_name: aws
+    build:
+      context: .
+      dockerfile: ../csp/aws/Dockerfile.dev
+    develop:
+      watch:
+        - action: sync
+          path: ../csp/aws/src
+          target: /app/src
+        - action: sync
+          path: ../csp/aws/public
+          target: /app/public
+        - action: rebuild
+          path: ../csp/aws/package.json
+    restart: always
+    ports:
+      - 3001:3000
+
+  gcp:
+    networks:
+      - gcas-form-lg
+    container_name: gcp
+    build:
+      context: .
+      dockerfile: ../csp/gcp/Dockerfile.dev
+    develop:
+      watch:
+        - action: sync
+          path: ../csp/gcp/src
+          target: /app/src
+        - action: sync
+          path: ../csp/gcp/public
+          target: /app/public
+        - action: rebuild
+          path: ../csp/gcp/package.json
+    restart: always
+    ports:
+      - 3002:3000
+
+  # csp:
+  #   networks:
+  #     - gcas-form-lg
+  #   container_name: csp
+  #   build:
+  #     context: .
+  #     dockerfile: ./apps/csp/Dockerfile.dev
+  #   develop:
+  #     watch:
+  #       - action: sync
+  #         path: ./apps/csp
+  #         target: /app
+  #       - action: rebuild
+  #         path: ./apps/csp/package.json
+  #   restart: always
+  #   ports:
+  #     - 3001:3001
