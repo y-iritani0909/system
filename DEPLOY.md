@@ -61,8 +61,7 @@ gcloud container clusters create-auto system-cluster \
 cd system
 
 # Docker イメージをビルド
-docker build -t asia-northeast1-docker.pkg.dev/sandbox-milabo/microfrontend-test/system:latest .
-
+docker build --platform linux/amd64 -t asia-northeast1-docker.pkg.dev/sandbox-milabo/microfrontend-test/system:latest .
 # イメージをプッシュ
 docker push asia-northeast1-docker.pkg.dev/sandbox-milabo/microfrontend-test/system:latest
 ```

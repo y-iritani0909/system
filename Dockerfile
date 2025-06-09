@@ -17,6 +17,9 @@ RUN npm ci
 # Copy the rest of the application
 COPY . .
 
+# Copy environment files
+COPY .env* ./
+
 # Build the application
 RUN npm run build
 
@@ -33,6 +36,9 @@ RUN adduser --system --uid 1001 nextjs
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
+
+# Copy environment files
+COPY --from=builder --chown=nextjs:nodejs /app/.env* ./
 
 USER nextjs
 

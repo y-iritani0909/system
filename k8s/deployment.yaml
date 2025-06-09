@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: system
+  name: system-deployment
   labels:
     app: system
 spec:
@@ -43,3 +43,67 @@ spec:
               port: 8080
             initialDelaySeconds: 5
             periodSeconds: 5
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aws-deployment
+  labels:
+    app: aws
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aws
+  template:
+    metadata:
+      labels:
+        app: aws
+    spec:
+      containers:
+        - name: aws
+          image: asia-northeast1-docker.pkg.dev/sandbox-milabo/microfrontend-test/aws:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NODE_ENV
+              value: "production"
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gcp-deployment
+  labels:
+    app: gcp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gcp
+  template:
+    metadata:
+      labels:
+        app: gcp
+    spec:
+      containers:
+        - name: gcp
+          image: asia-northeast1-docker.pkg.dev/sandbox-milabo/microfrontend-test/gcp:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NODE_ENV
+              value: "production"
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"

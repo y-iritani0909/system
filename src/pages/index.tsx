@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
     <>
@@ -22,21 +24,21 @@ export default function Home() {
           <h1 style={{ color: "#311b92", fontSize: "2rem" }}>
             Hello from system App
           </h1>
-          <a href="/second" style={{ marginTop: "10px" }}>
+          <Link href="/second" style={{ marginTop: "10px" }}>
             go to second page
-          </a>
-          <a
+          </Link>
+          <Link
             href={`${process.env.NEXT_PUBLIC_AWS_URL}`}
             style={{ marginTop: "10px", color: "#EE911FFF" }}
           >
             go to AWS App
-          </a>
-          <a
+          </Link>
+          <Link
             href={`${process.env.NEXT_PUBLIC_GCP_URL}`}
             style={{ marginTop: "10px", color: "#2CA4EAFF" }}
           >
             go to GCP App
-          </a>
+          </Link>
         </div>
       </div>
     </>

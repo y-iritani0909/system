@@ -4,24 +4,12 @@ metadata:
   name: microfrontend-ingress
   annotations:
     kubernetes.io/ingress.class: "gce"
-    # パス書き換えの設定
-    # ingress.kubernetes.io/rewrite-target: /
-    # 将来的にSSL証明書も追加可能
-    # kubernetes.io/ingress.global-static-ip-name: "microfrontend-ip"
 spec:
   rules:
     # IPアドレス直接アクセス用（ホスト名指定なし）
     - http:
         paths:
-          # System アプリ
-          - path: /system
-            pathType: Prefix
-            backend:
-              service:
-                name: system-service
-                port:
-                  number: 80
-          # ルートパスもsystemアプリに転送
+          # systemはルートパス
           - path: /
             pathType: Prefix
             backend:
@@ -29,10 +17,19 @@ spec:
                 name: system-service
                 port:
                   number: 80
-          - path: /csp
+          # AWS アプリ
+          - path: /aws
             pathType: Prefix
             backend:
               service:
-                name: system-service # 暫定
+                name: aws-service
+                port:
+                  number: 80
+          # GCP アプリ
+          - path: /gcp
+            pathType: Prefix
+            backend:
+              service:
+                name: gcp-service
                 port:
                   number: 80

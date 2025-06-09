@@ -14,3 +14,33 @@ spec:
       protocol: TCP
   selector:
     app: system
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: aws-service
+  labels:
+    app: aws
+spec:
+  selector:
+    app: aws
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gcp-service
+  labels:
+    app: gcp
+spec:
+  selector:
+    app: gcp
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+  type: ClusterIP
