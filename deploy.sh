@@ -30,7 +30,7 @@ print_info "GKEデプロイスクリプトを開始します..."
 
 # 1. Docker イメージをビルド
 print_info "Docker イメージをビルドします..."
-docker build -t ${REGISTRY}/${PROJECT_ID}/${REPOSITORY}/${IMAGE_NAME}:${IMAGE_TAG} .
+docker build --platform linux/amd64 -t ${REGISTRY}/${PROJECT_ID}/${REPOSITORY}/${IMAGE_NAME}:${IMAGE_TAG} .
 
 # 2. イメージをArtifact Registryにプッシュ
 print_info "イメージをArtifact Registryにプッシュします..."

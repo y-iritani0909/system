@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: system
-          image: asia-northeast1-docker.pkg.dev/sandbox-milabo/microfrontend-test/system:latest
+          image: asia-northeast1-docker.pkg.dev/sandbox-milabo/microfrontend/system:latest
           ports:
             - containerPort: 8080
           env:
@@ -62,7 +62,7 @@ spec:
     spec:
       containers:
         - name: aws
-          image: asia-northeast1-docker.pkg.dev/sandbox-milabo/microfrontend-test/aws:latest
+          image: asia-northeast1-docker.pkg.dev/sandbox-milabo/microfrontend/aws:latest
           ports:
             - containerPort: 3000
           env:
@@ -94,7 +94,7 @@ spec:
     spec:
       containers:
         - name: gcp
-          image: asia-northeast1-docker.pkg.dev/sandbox-milabo/microfrontend-test/gcp:latest
+          image: asia-northeast1-docker.pkg.dev/sandbox-milabo/microfrontend/gcp:latest
           ports:
             - containerPort: 3000
           env:

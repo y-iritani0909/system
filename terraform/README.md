@@ -2,6 +2,11 @@
 
 このディレクトリには、system アプリケーションのインフラストラクチャを管理する Terraform 設定が含まれています。
 
+## 作成されるリソース
+
+- **GKE Autopilot クラスター**: アプリケーションの実行環境
+- **Artifact Registry**: Docker イメージの保存と管理
+
 ## ディレクトリ構造
 
 ```
@@ -60,7 +65,18 @@ terraform plan
 terraform apply
 ```
 
-## モジュール
+## リソース
+
+### Artifact Registry
+
+Docker イメージを安全に保存・管理するためのプライベートレジストリです。
+
+**設定内容:**
+
+- リポジトリ名: `microfrontend`
+- 形式: Docker
+- 保持ポリシー: 最新 10 バージョンを保持
+- 場所: asia-northeast1
 
 ### GKE モジュール
 
@@ -73,10 +89,14 @@ GKE Autopilot クラスターを作成します。
 - VPC-native ネットワーキング
 - マスター認証ネットワーク設定
 
-**出力値:**
+## 出力値
 
-- `cluster_name`: 作成されたクラスター名
-- `cluster_endpoint`: クラスターのエンドポイント
+| 出力名                         | 説明                           |
+| ------------------------------ | ------------------------------ |
+| `cluster_name`                 | 作成された GKE クラスター名    |
+| `cluster_endpoint`             | GKE クラスターのエンドポイント |
+| `artifact_registry_repository` | Artifact Registry リポジトリ名 |
+| `artifact_registry_url`        | Docker イメージ push 用の URL  |
 
 ## 将来の拡張
 

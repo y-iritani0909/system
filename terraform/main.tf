@@ -12,6 +12,22 @@ provider "google" {
   region  = var.region
 }
 
+# Artifact Registry リポジトリ
+resource "google_artifact_registry_repository" "microfrontend" {
+  repository_id = "microfrontend"
+  location      = var.region
+  format        = "DOCKER"
+  description   = "Microfrontend Docker images repository"
+  
+  cleanup_policies {
+    id     = "keep-recent-versions"
+    action = "KEEP"
+    most_recent_versions {
+      keep_count = 10
+    }
+  }
+}
+
 # GKE クラスター
 module "gke" {
   source = "./gke"
@@ -29,4 +45,12 @@ output "cluster_name" {
 
 output "cluster_endpoint" {
   value = module.gke.cluster_endpoint
+}
+
+output "artifact_registry_repository" {
+  value = google_artifact_registry_repository.microfrontend.name
+}
+
+output "artifact_registry_url" {
+  value = "${var.region}-docker.pkg.dev/${var.project_id}/${google_artifact_registry_repository.microfrontend.repository_id}"
 }
